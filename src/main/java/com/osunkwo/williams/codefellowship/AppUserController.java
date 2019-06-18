@@ -29,9 +29,15 @@ public class AppUserController {
     @Autowired
     PasswordEncoder bCryptPasswordEncoder;
 
+    @GetMapping("/")
+    public String getHomePage(){
+        return "home";
+    }
+
     @GetMapping("/myprofile")
     public String getProfilePage(Principal p, Model m) {
-        m.addAttribute("principal",p);
+        AppUser currentUser = (AppUser) ((UsernamePasswordAuthenticationToken) p).getPrincipal();
+        m.addAttribute("currentUser", currentUser);
         return "myprofile";
     }
 
@@ -41,24 +47,10 @@ public class AppUserController {
         return "login";
     }
 
-//    @PostMapping("/login")
-//    public RedirectView loginUser(String username, String password){
-//        AppUser ourUser = appUserRepository.findByUsername(username);
-//        if (ourUser != null){
-//            String passedPassword = bCryptPasswordEncoder.encode(password);
-//            if(passedPassword.equals(ourUser.getPassword())){
-//                return new RedirectView("/myprofile");
-//            }else{
-//                return new RedirectView("/login");
-//            }
-//        }else{
-//            return new RedirectView("/login");
-//        }
-//    }
-
     @PostMapping("/registration")
     public RedirectView createUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio) throws ParseException {
-        Date dateOfBirthDateFormat = new SimpleDateFormat("yyyy/MM/dd").parse(dateOfBirth);
+        Date dateOfBirthDateFormat = new SimpleDateFormat("yyyy-MM-dd").parse(dateOfBirth);
+        System.out.println("this is the first name: "+ firstName);
         AppUser newUser = new AppUser(username, bCryptPasswordEncoder.encode(password), firstName, lastName, dateOfBirthDateFormat, bio);
         appUserRepository.save(newUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
