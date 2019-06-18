@@ -37,12 +37,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 //allow requests to all urls that match the pattern
-                .antMatchers("/", "/registration").permitAll()
+                .antMatchers("/", "/registration", "/login").permitAll()
                 //anything else you must be logged in
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                .defaultSuccessUrl("/myprofile", true)
+                .failureUrl("/login")
                 .and()
                 .logout()
         .logoutSuccessUrl("/");
