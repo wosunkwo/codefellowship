@@ -1,7 +1,5 @@
 package com.osunkwo.williams.codefellowship;
 
-// TODO: make this import match your package structure
-// import com.ferreirae.securedemo.appuser.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 //allow requests to all urls that match the pattern
-                .antMatchers("/", "/registration", "/login").permitAll()
+                .antMatchers("/", "/registration", "/login", "/*.css").permitAll()
                 //anything else you must be logged in
                 .anyRequest().authenticated()
                 .and()
