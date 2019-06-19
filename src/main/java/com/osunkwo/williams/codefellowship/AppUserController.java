@@ -10,7 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
@@ -40,6 +42,18 @@ public class AppUserController {
     public String getProfilePage(Principal p, Model m) {
         AppUser currentUser = appUserRepository.findByUsername(p.getName());
         m.addAttribute("currentUser", currentUser);
+        m.addAttribute("sessionStatus", true);
+        return "myprofile";
+    }
+
+    @GetMapping("/users/{id}")
+    public String getUserById(@PathVariable long id, Principal p, Model m){
+        AppUser searchedUser = appUserRepository.findById(id).get();
+        AppUser currentUser = appUserRepository.findByUsername(p.getName());
+        boolean sessionStatus = isLoggedInUserTheSameAsSearchedUser(currentUser, searchedUser);
+
+        m.addAttribute("currentUser", searchedUser);
+        m.addAttribute("sessionStatus", sessionStatus);
 
         return "myprofile";
     }
@@ -73,6 +87,13 @@ public class AppUserController {
 
     public Boolean isUserLoggedIn(Principal p){
         if(p != null)
+            return true;
+        else
+            return false;
+    }
+
+    public Boolean isLoggedInUserTheSameAsSearchedUser(AppUser currentUser, AppUser targetUser) {
+        if(currentUser.getUsername().equals(targetUser.getUsername()))
             return true;
         else
             return false;
