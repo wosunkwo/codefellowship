@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 
@@ -18,7 +15,9 @@ public class AppUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
+    @Column(unique = true)
     String username;
+
     String password;
     String firstName;
     String lastName;
