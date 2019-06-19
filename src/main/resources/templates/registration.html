@@ -8,7 +8,15 @@
 </head>
 <body>
 <div>
-    <nav th:replace="fragments/fragmentTemplates :: nav">...</nav>
+
+    <div th:if="${userStatus}">
+        <nav th:replace="fragments/fragmentTemplates :: nav">...</nav>
+    </div>
+
+    <div th:if="${userStatus == false}">
+        <nav th:replace="fragments/fragmentTemplates :: navStranger">...</nav>
+    </div>
+
     <h1>REGISTER AS A NEW USER</h1>
     <form action="/registration" method="POST">
 

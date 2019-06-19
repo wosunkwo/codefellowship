@@ -7,7 +7,17 @@
     <link href="/style.css" rel="stylesheet"/>
 </head>
 <body>
-<nav th:replace="fragments/fragmentTemplates :: nav">...</nav>
+
+
+<div th:if="${userStatus}">
+    <nav th:replace="fragments/fragmentTemplates :: nav">...</nav>
+</div>
+
+<div th:if="${userStatus == false}">
+    <nav th:replace="fragments/fragmentTemplates :: navStranger">...</nav>
+</div>
+
+
 <div style = "text-align:center; display:block;">
     <h1>LOG IN</h1>
     <form action="/login" method="post">
