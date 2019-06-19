@@ -4,19 +4,31 @@
     <meta charset="UTF-8">
     <title>Profile Page</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/styles.css" rel="stylesheet"/>
 </head>
 <body>
+    <nav th:replace="fragments/fragmentTemplates :: nav">...</nav>
+    <header th:replace="fragments/fragmentTemplates :: header">...</header>
     <div style = "text-align:center; display:block;">
-        <h3> Welcome, <span th:text="${currentUser.username}"> </span></h3>
         <img src = "https://wallpapercave.com/wp/Bi1b2FO.jpg" style="width: 200px;">
-        <br>
         <p> First Name: <span th:text="${currentUser.firstName} "></span></p>
-        <br>
         <p>Last Name: <span th:text="${currentUser.lastName} "></span></p>
-        <br>
         <p>Date of Birth: <span th:text="${currentUser.dateOfBirth} "></span></p>
-        <br>
         <p>Biography: <span th:text="${currentUser.bio} "></span></p>
+
+        <hr>
+
+        <div th:if="${!(currentUser.posts.isEmpty())}">
+            <h3>List of Your Posts</h3>
+            <ol>
+                <li th:each="post : ${currentUser.posts}">
+                    <p th:text="${post.getBody()}"> </p>
+                    <p> Posted on: <span th:text="${post.getCreatedAt()}"> </span></p>
+                </li>
+            </ol>
+        </div>
+        <a href="/post/create"> Create a New Post</a>
+        <br>
         <a href="/logout">Log Out</a>
 </div>
 

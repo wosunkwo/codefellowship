@@ -36,8 +36,9 @@ public class AppUserController {
 
     @GetMapping("/myprofile")
     public String getProfilePage(Principal p, Model m) {
-        AppUser currentUser = (AppUser) ((UsernamePasswordAuthenticationToken) p).getPrincipal();
+        AppUser currentUser = appUserRepository.findByUsername(p.getName());
         m.addAttribute("currentUser", currentUser);
+
         return "myprofile";
     }
 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create a post page</title>
+</head>
+<body>
+
+<header th:replace="fragments/fragmentTemplates :: header">...</header>
+<div style = "text-align:center; display:block;">
+    <h1>Add a New Post</h1>
+    <form action="/post/create" method="post">
+
+        <label> Body</label>
+        <textarea name="body" placeholder="Post something interesting..." style="height:200px"></textarea>
+
+        <br>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+</body>
+</html>

@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class AppUser implements UserDetails {
@@ -23,6 +24,9 @@ public class AppUser implements UserDetails {
     String lastName;
     Date dateOfBirth;
     String bio;
+
+    @OneToMany(mappedBy = "creator")
+    List<Post> posts;
 
     public AppUser(){}
 
@@ -57,6 +61,10 @@ public class AppUser implements UserDetails {
 
     public Date getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
     }
 
     @Override

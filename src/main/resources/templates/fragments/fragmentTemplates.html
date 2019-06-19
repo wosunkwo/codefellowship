@@ -1,0 +1,15 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<header class="header" th:fragment="header">
+    <h4>Welcome <span th:text="${currentUser.username}"></span></h4>
+</header>
+
+<nav class="nav" th:fragment="nav">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/myprofile">My Profile</a></li>
+        <li><a href="/post/create">Add Post</a></li>
+        <li style="float:right"><a class="active" href="/logout">About</a></li>
+    </ul>
+
+</nav>
