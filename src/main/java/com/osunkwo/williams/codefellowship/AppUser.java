@@ -5,12 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class AppUser implements UserDetails {
@@ -18,12 +16,17 @@ public class AppUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
+    @Column(unique = true)
     String username;
+
     String password;
     String firstName;
     String lastName;
     Date dateOfBirth;
     String bio;
+
+    @OneToMany(mappedBy = "creator")
+    List<Post> posts;
 
     public AppUser(){}
 
@@ -58,6 +61,10 @@ public class AppUser implements UserDetails {
 
     public Date getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
     }
 
     @Override
