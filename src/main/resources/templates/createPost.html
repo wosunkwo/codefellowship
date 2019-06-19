@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Create a post page</title>
+    <link href="/style.css" rel="stylesheet"/>
 </head>
-<body>
 
+<body>
+<nav th:replace="fragments/fragmentTemplates :: nav">...</nav>
 <header th:replace="fragments/fragmentTemplates :: header">...</header>
 <div style = "text-align:center; display:block;">
     <h1>Add a New Post</h1>

@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 //allow requests to all urls that match the pattern
-                .antMatchers("/", "/registration", "/login").permitAll()
+                .antMatchers("/", "/registration", "/login", "/*.css").permitAll()
                 .antMatchers(HttpMethod.GET, "/*.css").permitAll()
                 //anything else you must be logged in
                 .anyRequest().authenticated()
