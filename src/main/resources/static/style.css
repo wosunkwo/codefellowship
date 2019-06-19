@@ -1,7 +1,8 @@
 body {
-    background-image: url("https://images.unsplash.com/photo-1438183972690-6d4658e3290e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1867&q=80");
+    background-image: url("https://images.unsplash.com/photo-1552984418-b55abf780dd4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
     background-repeat: no-repeat;
     background-size: cover;
+    color: white;
 }
 
 .nav {
@@ -35,4 +36,9 @@ display:block;
 
 .nav .active {
   background-color: #4CAF50;
+}
+
+.middleDivs{
+text-align: center;
+display: block;
 }
