@@ -30,7 +30,9 @@ public class AppUserController {
     PasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/")
-    public String getHomePage(){
+    public String getHomePage(Principal p, Model m){
+        boolean userStatus = isUserLoggedIn(p);
+        m.addAttribute("userStatus", userStatus);
         return "home";
     }
 
@@ -44,7 +46,10 @@ public class AppUserController {
 
 
     @GetMapping("/login")
-    public String getLoginPage() {
+    public String getLoginPage(Principal p, Model m)
+    {
+        boolean userStatus = isUserLoggedIn(p);
+        m.addAttribute("userStatus", userStatus);
         return "login";
     }
 
@@ -60,8 +65,16 @@ public class AppUserController {
     }
 
     @GetMapping("/registration")
-    public String getRegistrationPage() {
+    public String getRegistrationPage(Principal p, Model m) {
+        boolean userStatus = isUserLoggedIn(p);
+        m.addAttribute("userStatus", userStatus);
         return "registration";
     }
 
+    public Boolean isUserLoggedIn(Principal p){
+        if(p != null)
+            return true;
+        else
+            return false;
+    }
 }
