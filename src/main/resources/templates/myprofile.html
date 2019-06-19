@@ -4,32 +4,29 @@
     <meta charset="UTF-8">
     <title>Profile Page</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="/styles.css" rel="stylesheet"/>
+    <link href="/style.css" rel="stylesheet"/>
 </head>
 <body>
     <nav th:replace="fragments/fragmentTemplates :: nav">...</nav>
     <header th:replace="fragments/fragmentTemplates :: header">...</header>
     <div style = "text-align:center; display:block;">
-        <img src = "https://wallpapercave.com/wp/Bi1b2FO.jpg" style="width: 200px;">
-        <p> First Name: <span th:text="${currentUser.firstName} "></span></p>
-        <p>Last Name: <span th:text="${currentUser.lastName} "></span></p>
-        <p>Date of Birth: <span th:text="${currentUser.dateOfBirth} "></span></p>
-        <p>Biography: <span th:text="${currentUser.bio} "></span></p>
+        <img src = "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80" style="width: 150px;">
+        <p><b> First Name: <span th:text="${currentUser.firstName} "></span></b></p>
+        <p><b>Last Name: <span th:text="${currentUser.lastName} "></span></b></p>
+        <p><b>Date of Birth: <span th:text="${currentUser.dateOfBirth} "></span></b></p>
+        <p><b>Biography: <span th:text="${currentUser.bio} "></span></b></p>
 
         <hr>
 
-        <div th:if="${!(currentUser.posts.isEmpty())}">
+        <div class="postList" th:if="${!(currentUser.posts.isEmpty())}">
             <h3>List of Your Posts</h3>
             <ol>
                 <li th:each="post : ${currentUser.posts}">
-                    <p th:text="${post.getBody()}"> </p>
-                    <p> Posted on: <span th:text="${post.getCreatedAt()}"> </span></p>
+                    <b><p th:text="${post.getBody()}"> </p></b>
+                    <p><b> Posted on: <span th:text="${post.getCreatedAt()}"> </span></b></p>
                 </li>
             </ol>
         </div>
-        <a href="/post/create"> Create a New Post</a>
-        <br>
-        <a href="/logout">Log Out</a>
 </div>
 
 </body>

@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/style.css" rel="stylesheet"/>
 </head>
 <body>
-<a style="float: left;" href="/login"> LOGIN </a>
-<br>
-<h2 style = "text-align:center; display:block;"> Welcome to Williams's Code Fellows Website</h2>
-<p>You can login in or create a new account, and post on your profile. Have fun</p>
+<nav th:replace="fragments/fragmentTemplates :: nav">...</nav>
+<div style = "text-align:center; display:block;">
+    <h2> Welcome to Williams's Code Fellows Website</h2>
+    <p>You can login in or create a new account, and post on your profile. Have fun</p>
+
+</div>
 
 </body>
 </html>
