@@ -21,6 +21,7 @@ public class PostController {
     public String createPost(Principal p, Model m){
         AppUser currentUser = appUserRepository.findByUsername(p.getName());
         m.addAttribute("currentUser", currentUser);
+        m.addAttribute("sessionStatus", true);
         return "createPost";
     }
 
