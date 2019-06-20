@@ -6,15 +6,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class AppUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
+
+    public long getId() {
+        return id;
+    }
 
     @Column(unique = true)
     String username;
@@ -24,19 +26,45 @@ public class AppUser implements UserDetails {
     String lastName;
     Date dateOfBirth;
     String bio;
+    String imageUrl;
 
     @OneToMany(mappedBy = "creator")
     List<Post> posts;
 
+    //this creates an associative relationship between a user being followed, and the user doing the following
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "following_followers",
+            joinColumns = { @JoinColumn(name = "followee_id") },
+            inverseJoinColumns = { @JoinColumn(name = "follower_id") }
+    )
+    Set<AppUser> followers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "followers")
+    Set<AppUser> following = new HashSet<>();
+
     public AppUser(){}
 
-    public AppUser(String username, String password, String firstName, String lastName, Date dateOfBirth, String bio){
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public Set<AppUser> getFollowers() {
+        return followers;
+    }
+
+    public Set<AppUser> getFollowing() {
+        return following;
+    }
+
+    public AppUser(String username, String password, String firstName, String lastName, Date dateOfBirth, String bio, String imageUrl){
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.bio = bio;
+        this.imageUrl = imageUrl;
     }
 
     public String getUsername() {
