@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Discover Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<nav th:replace="fragments/fragmentTemplates :: nav">...</nav>
+<header th:replace="fragments/fragmentTemplates :: header">...</header>
+
+<div class="middleDivs">
+    <h3>Your NewsFeed</h3>
+    <div>
+        <div th:each = "user : ${following}">
+            <p th:each = "post: ${user.posts}">
+                <a th:href="@{'/users/' + ${post.creator.getId()}}" ><span th:text="${post.body}"> </span></a><br>
+            </p>
+            <p><img th:src="${user.imageUrl}" style="width: 35px;" > <span th:text="${user.username}"></span></p>
+<!--            <a th:href="@{'/individualUser/' + ${user.username}}" > Follow </a>-->
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

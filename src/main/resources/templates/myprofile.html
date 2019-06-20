@@ -12,7 +12,7 @@
     <header th:replace="fragments/fragmentTemplates :: header">...</header>
 
     <div style = "text-align:center; display:block;">
-        <img src = "https://images.unsplash.com/photo-1519667556925-7df9d88d3955?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" style="width: 150px;">
+        <img th:src="${currentUser.imageUrl}" style="width: 150px;">
         <p><b> First Name: <span th:text="${currentUser.firstName} "></span></b></p>
         <p><b>Last Name: <span th:text="${currentUser.lastName} "></span></b></p>
         <p><b>Date of Birth: <span th:text="${currentUser.dateOfBirth} "></span></b></p>
@@ -28,6 +28,26 @@
                     <p><b> Posted on: <span th:text="${post.getCreatedAt()}"> </span></b></p>
                 </li>
             </ol>
+        </div>
+
+        <div class="follwersDiv">
+            <p>People following you: </p>
+            <ul>
+                <li th:each="follower: ${currentUser.followers}">
+                    <img th:src="${follower.imageUrl}" style="width:50px;">
+                    <p><span th:text="${follower.username}"></span></p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="followingDiv">
+            <p>People you are following: </p>
+            <ul>
+                <li th:each="following: ${currentUser.following}">
+                    <img th:src="${following.imageUrl}" style="width:50px;">
+                    <p><span th:text="${following.username}"></span></p>
+                </li>
+            </ul>
         </div>
 </div>
 

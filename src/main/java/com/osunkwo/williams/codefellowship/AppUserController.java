@@ -1,5 +1,7 @@
 package com.osunkwo.williams.codefellowship;
 
+//import jdk.nashorn.internal.ir.debug.PrintVisitor;
+import com.google.common.collect.Lists;
 import org.springframework.security.core.Authentication;
 //import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
+
 import java.security.Principal;
 import java.security.Security;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 @Controller
 public class AppUserController {
@@ -68,10 +73,9 @@ public class AppUserController {
     }
 
     @PostMapping("/registration")
-    public RedirectView createUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio) throws ParseException {
+    public RedirectView createUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio, String imageUrl) throws ParseException {
         Date dateOfBirthDateFormat = new SimpleDateFormat("yyyy-MM-dd").parse(dateOfBirth);
-        System.out.println("this is the first name: "+ firstName);
-        AppUser newUser = new AppUser(username, bCryptPasswordEncoder.encode(password), firstName, lastName, dateOfBirthDateFormat, bio);
+        AppUser newUser = new AppUser(username, bCryptPasswordEncoder.encode(password), firstName, lastName, dateOfBirthDateFormat, bio, imageUrl);
         appUserRepository.save(newUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -84,6 +88,48 @@ public class AppUserController {
         m.addAttribute("userStatus", userStatus);
         return "registration";
     }
+
+    @GetMapping("/discover")
+    public String showAllTheUsersInDataBase(Principal p, Model m){
+        AppUser loggedInUser = appUserRepository.findByUsername(p.getName());
+        Iterable<AppUser> allUsers = appUserRepository.findAll();
+        List allUsersList = Lists.newArrayList(allUsers);
+        allUsersList.remove(loggedInUser);
+        for(int i=0; i < allUsersList.size(); i++){
+            if(loggedInUser.following.contains(allUsersList.get(i)))
+                allUsersList.remove(allUsersList.get(i));
+        }
+
+        m.addAttribute("allUsers", allUsersList);
+        m.addAttribute("currentUser", loggedInUser);
+        m.addAttribute("sessionStatus", true);
+        return "discover";
+    }
+
+    @GetMapping ("/individualUser/{username}")
+    public RedirectView followUser(@PathVariable String username, Principal p, Model m){
+        AppUser currentUser = appUserRepository.findByUsername(p.getName());
+        AppUser userToFollow = appUserRepository.findByUsername(username);
+        System.out.println("this is my current user: "+ currentUser.getUsername());
+        System.out.println("this is the user I want to follow: "+ userToFollow.getUsername());
+        currentUser.following.add(userToFollow);
+        userToFollow.followers.add(currentUser);
+        appUserRepository.save(currentUser);
+        appUserRepository.save(userToFollow);
+        m.addAttribute("currentUser", currentUser);
+        return new RedirectView("/myprofile");
+    }
+
+
+    @GetMapping("/feed")
+    public String getPostFeed(Principal p, Model m) {
+      AppUser currentUser = appUserRepository.findByUsername(p.getName());
+       m.addAttribute("following", currentUser.following);
+       m.addAttribute("currentUser", currentUser);
+       m.addAttribute("sessionStatus", true);
+        return "feed";
+    }
+
 
     public Boolean isUserLoggedIn(Principal p){
         if(p != null)
