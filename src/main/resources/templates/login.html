@@ -17,25 +17,23 @@
     <nav th:replace="fragments/fragmentTemplates :: navStranger">...</nav>
 </div>
 
+<div id = "container">
+    <h2>&bull; LOGIN &bull;</h2>
+    <div class="underline">
+    </div>
+    <form class="formForm" action="/login" method="post">
+        <div class="username">
+            <label>User Name</label>
+            <input type="text"name="username" placeholder="Your username..">
+        </div>
 
-<div class = "middleDivs">
-    <h1>LOG IN</h1>
-    <form action="/login" method="post">
+        <div class="password">
+            <label>Password</label>
+            <input type="password"name="password" placeholder="Your password..">
+        </div>
 
-        <label>User Name</label>
-        <input type="text"name="username" placeholder="Your username..">
-
-        <br>
-
-        <label>Password</label>
-        <input type="password"name="password" placeholder="Your password..">
-
-        <br>
-
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" id="form_button">
     </form>
-
-<a href="/registration">If you are a new user</a>
 </div>
 </body>
 </html>

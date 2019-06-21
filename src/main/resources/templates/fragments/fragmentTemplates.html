@@ -1,11 +1,8 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
-<header class="header" th:fragment="header">
-    <h5>Welcome <span th:text="${currentUser.username}"></span></h5>
-</header>
 
 <nav class="nav" th:fragment="nav">
-    <li>
+    <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/myprofile">My Profile</a></li>
         <li th:if="${sessionStatus}"><a href="/post/create">Add Post</a></li>
@@ -24,3 +21,7 @@
     </ul>
 
 </div>
+
+<header class="header" th:fragment="header">
+    <h5>Welcome <span th:text="${currentUser.username}"></span></h5>
+</header>

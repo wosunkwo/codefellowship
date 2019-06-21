@@ -12,16 +12,18 @@
 <header th:replace="fragments/fragmentTemplates :: header">...</header>
 
 <div class="middleDivs">
-    <h3>These are the current users in our Application</h3>
-    <ul>
-        <li th:each = "user : ${allUsers}">
-            <img th:src="${user.imageUrl}" style="width: 80px;">
-            <p> Name: <span th:text="${user.firstName}"> </span> <span th:text="${user.lastName}"> </span> </p>
-            <p> Date of Birth: <span th:text="${user.dateOfBirth}"></span></p>
-            <p> Biography: <span th:text="${user.bio}"></span></p>
-            <a th:href="@{'/individualUser/' + ${user.username}}" > Follow </a>
-        </li>
-    </ul>
+    <h3> Discover New Players </h3>
+    <div>
+        <div th:each = "user : ${allUsers}">
+            <a th:href="@{'/users/' + ${user.getId()}}"><img th:src="${user.imageUrl}" style="width: 80px;"></a>
+            <div class="aboutMe">
+                <p> Name: <span th:text="${user.firstName}"> </span> <span th:text="${user.lastName}"> </span> </p>
+                <p> Date of Birth: <span th:text="${user.dateOfBirth}"></span></p>
+                <p> Biography: <span th:text="${user.bio}"></span></p>
+            </div>
+            <hr>
+        </div>
+    </div>
 </div>
 
 </body>

@@ -15,11 +15,12 @@
     <h3>Your NewsFeed</h3>
     <div>
         <div th:each = "user : ${following}">
-            <p th:each = "post: ${user.posts}">
-                <a th:href="@{'/users/' + ${post.creator.getId()}}" ><span th:text="${post.body}"> </span></a><br>
-            </p>
-            <p><img th:src="${user.imageUrl}" style="width: 35px;" > <span th:text="${user.username}"></span></p>
-<!--            <a th:href="@{'/individualUser/' + ${user.username}}" > Follow </a>-->
+            <div class="aboutMe">
+                <p th:each = "post: ${user.posts}">
+                    <a th:href="@{'/users/' + ${post.creator.getId()}}" ><span th:text="${post.body}"> </span></a><br>
+                </p>
+                <p th:if="${!user.posts.empty()}"><img th:src="${user.imageUrl}" style="width: 35px;" > <span th:text="${user.username}"></span></p>
+            </div>
         </div>
     </div>
 

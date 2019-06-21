@@ -17,44 +17,45 @@
         <nav th:replace="fragments/fragmentTemplates :: navStranger">...</nav>
     </div>
 
-    <div class="middleDivs">
-        <h1>REGISTER AS A NEW USER</h1>
-        <form action="/registration" method="POST">
+    <div id="containerRegister">
+        <h2>&bull; REGISTER AS A NEW USER &bull;</h2>
+        <div class="underline">
+        </div>
+        <form class="formForm" action="/registration" method="POST">
 
-            <label>User Name</label>
-            <input type="text"name="username" placeholder="Your username..">
+            <div class="username">
+                <label class="name"></label>
+                <input type="text" placeholder="My  username is" name="username" required>
+            </div>
+            <div class="password">
+                <label class="name"></label>
+                <input type="password" placeholder="My password is" name="password" required>
+            </div>
 
-            <br>
+            <div class="firstName">
+                <label class="name"></label>
+                <input type="text" placeholder="My first name is" name="firstName" required>
+            </div>
+            <div class="lastName">
+                <label class="lastName"></label>
+                <input type="text" placeholder="My last name is" name="lastName" required>
+            </div>
+            <div class="dateOfBirth">
+                <label class="name"></label>
+                <input type="date" placeholder="My date of birth is" name="dateOfBirth" required>
+            </div>
+            <div class="bio">
+                <label class="message"></label>
+                <textarea name="bio" placeholder="A little bit about myself..." cols="20" rows="4" required></textarea>
+            </div>
+            <div class="profilePic">
+                <label class="name"></label>
+                <input type="text" placeholder="Add a profile picture link " name="imageUrl" required>
+            </div>
 
-            <label>Password</label>
-            <input type="password"name="password" placeholder="Your password..">
-
-            <br>
-
-            <label>First Name</label>
-            <input type="text" name="firstName" placeholder="Your first name..">
-
-            <br>
-
-            <label>Last Name</label>
-            <input type="text" name="lastName" placeholder="Your last name..">
-
-            <br>
-
-            <label>Date of Birth</label>
-            <input type="date" name="dateOfBirth" placeholder="Your date of birth ..">
-
-            <br>
-
-            <label>Biography</label>
-            <textarea name="bio" placeholder="Write something about yourself.." style="height:200px"></textarea>
-
-            <br>
-
-            <label>Profile Picture</label>
-            <input type="text" name="imageUrl">
-
-            <input type="submit" value="Submit">
+            <div class="submit">
+                <input type="submit" value="REGISTER" id="form_button" />
+            </div>
         </form>
     </div>
 
