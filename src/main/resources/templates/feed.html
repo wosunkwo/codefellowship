@@ -17,7 +17,7 @@
         <div th:each = "user : ${following}">
             <div class="aboutMe">
                 <p th:each = "post: ${user.posts}">
-                    <a th:href="@{'/users/' + ${post.creator.getId()}}" ><span th:text="${post.body}"> </span></a><br>
+                    <a th:href="@{'/users/' + ${post.creator.getId()}}" ><span th:text="${post.body}"> </span></a>
                 </p>
                 <p th:if="${!user.posts.empty()}"><img th:src="${user.imageUrl}" style="width: 35px;" > <span th:text="${user.username}"></span></p>
             </div>
