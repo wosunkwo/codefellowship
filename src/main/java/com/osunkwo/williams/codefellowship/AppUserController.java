@@ -56,9 +56,10 @@ public class AppUserController {
         AppUser searchedUser = appUserRepository.findById(id).get();
         AppUser currentUser = appUserRepository.findByUsername(p.getName());
         boolean sessionStatus = isLoggedInUserTheSameAsSearchedUser(currentUser, searchedUser);
-
+        boolean followerStatus = isLoggedInUserAlreadyFollowingSearchedUser(currentUser, searchedUser);
         m.addAttribute("currentUser", searchedUser);
         m.addAttribute("sessionStatus", sessionStatus);
+        m.addAttribute("followerStatus", followerStatus);
 
         return "myprofile";
     }
@@ -95,10 +96,7 @@ public class AppUserController {
         Iterable<AppUser> allUsers = appUserRepository.findAll();
         List allUsersList = Lists.newArrayList(allUsers);
         allUsersList.remove(loggedInUser);
-        for(int i=0; i < allUsersList.size(); i++){
-            if(loggedInUser.following.contains(allUsersList.get(i)))
-                allUsersList.remove(allUsersList.get(i));
-        }
+        allUsersList.removeAll(loggedInUser.following);
 
         m.addAttribute("allUsers", allUsersList);
         m.addAttribute("currentUser", loggedInUser);
@@ -106,8 +104,8 @@ public class AppUserController {
         return "discover";
     }
 
-    @GetMapping ("/individualUser/{username}")
-    public RedirectView followUser(@PathVariable String username, Principal p, Model m){
+    @GetMapping ("/individualUser")
+    public RedirectView followUser(@RequestParam String username, Principal p, Model m){
         AppUser currentUser = appUserRepository.findByUsername(p.getName());
         AppUser userToFollow = appUserRepository.findByUsername(username);
         System.out.println("this is my current user: "+ currentUser.getUsername());
@@ -143,5 +141,12 @@ public class AppUserController {
             return true;
         else
             return false;
+    }
+
+    public Boolean isLoggedInUserAlreadyFollowingSearchedUser(AppUser currentUser, AppUser searchedUser){
+        if(currentUser.following.contains(searchedUser))
+            return true;
+        else
+        return false;
     }
 }

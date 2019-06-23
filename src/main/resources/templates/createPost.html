@@ -9,18 +9,22 @@
 <body>
 <nav th:replace="fragments/fragmentTemplates :: nav">...</nav>
 <header th:replace="fragments/fragmentTemplates :: header">...</header>
-<div style = "text-align:center; display:block;">
-    <h1>Add a New Post</h1>
-    <form action="/post/create" method="post">
 
-        <label> Body</label>
-        <textarea name="body" placeholder="Post something interesting..." style="height:200px"></textarea>
-
-        <br>
-
-        <input type="submit" value="Submit">
+<div id="container">
+    <h2>&bull; Add a New Post &bull;</h2>
+    <div class="underline">
+    </div>
+    <form class="formForm" action="/post/create" method="POST">
+        <div class="message">
+            <label class="message"></label>
+            <textarea name="body" placeholder="Post something interesting..."  cols="20" rows="4" required></textarea>
+        </div>
+        <div class="submit">
+            <input type="submit" value="Post" id="form_button" />
+        </div>
     </form>
 </div>
+
 
 </body>
 </html>

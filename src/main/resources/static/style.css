@@ -1,8 +1,176 @@
+
+/*********************Style for my Create Post Page and all my other form pages  ************************************/
+@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+
+html {
+  font-family: 'Montserrat', Arial, sans-serif;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+#form_button {
+  overflow: visible;
+}
+
+#form_button {
+  text-transform: none;
+}
+
+#form_button, input, textarea {
+  color: #5A5A5A;
+  font: inherit;
+  margin: 0;
+}
+
+input {
+  line-height: normal;
+}
+
+textarea {
+  overflow: auto;
+}
+
+#container {
+  border: solid 3px #474544;
+  max-width: 350px;
+  margin: 60px auto;
+  position: relative;
+  background-color: #F2F3EB;
+}
+
+.formForm {
+  padding: 37.5px;
+  margin: 50px 0;
+}
+
+h2 {
+  color: #474544;
+  letter-spacing: 7px;
+  text-align: center;
+}
+
+.underline {
+  border-bottom: solid 2px #474544;
+  margin: -0.512em auto;
+  width: 80px;
+}
+
+.message {
+	float: none;
+}
+
+textarea {
+	line-height: 150%;
+	height: 150px;
+	resize: none;
+    width: 100%;
+}
+
+::-webkit-input-placeholder {
+	color: #474544;
+}
+
+:-moz-placeholder {
+	color: #474544;
+	opacity: 1;
+}
+
+::-moz-placeholder {
+	color: #474544;
+	opacity: 1;
+}
+
+:-ms-input-placeholder {
+	color: #474544;
+}
+
+#form_button {
+  background: none;
+  border: solid 2px #474544;
+  color: #474544;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-size: 0.875em;
+  font-weight: bold;
+  outline: none;
+  padding: 20px 35px;
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+#form_button:hover {
+  background: #474544;
+  color: #F2F3EB;
+}
+
+/*********************************** Unique to register page *********************************/
+
+#containerRegister{
+  border: solid 3px #474544;
+  max-width: 450px;
+  margin: 60px auto;
+  position: relative;
+  background-color: #F2F3EB;
+}
+
+.lastName {
+	float: right;
+	width: 45%;
+}
+
+input[type='text'], [type='password'], [type='date'], textarea {
+	background: none;
+  border: none;
+	border-bottom: solid 2px #474544;
+	color: #474544;
+	font-size: 1.000em;
+  font-weight: 400;
+  letter-spacing: 1px;
+	margin: 0em 0 1.875em 0;
+	padding: 0 0 0.875em 0;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+input[type='text']:focus, [type='password']:focus, [type='date'], textarea:focus {
+	outline: none;
+	padding: 0 0 0.875em 0;
+}
+
+.username, .password, .dateOfBirth, .bio, profilePic {
+	float: left;
+	width: 100%;
+}
+
+.firstName {
+ float: left;
+  width: 45%;
+}
+
+
+
+
+
+/*****************************************************************************-----------------------------*/
 body {
-    background-image: url("https://images.unsplash.com/photo-1552984418-b55abf780dd4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+    background-image: url("https://images.unsplash.com/photo-1486882430381-e76d701e0a3e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
     background-repeat: no-repeat;
     background-size: cover;
-    color: white;
+    color: black;
+    font-size: 10px;
 }
 
 .nav {
@@ -41,4 +209,35 @@ display:block;
 .middleDivs{
 text-align: center;
 display: block;
+}
+
+/*****************My Profile Page Styling********************/
+
+
+.aboutMe{
+border: 3px inset grey;
+background-color: #f1f1f1;
+max-width:400px;
+margin:auto;
+margin-top: 5px;
+}
+
+.individualPost{
+border: 3px solid white;
+background-color: white;
+}
+
+.profile-flex-container {
+display: flex;
+flex-wrap: nowrap;
+}
+
+.profile-flex-container > div {
+ background-color: #f1f1f1;
+ width: 300px;
+ margin: 15px;
+}
+
+.individualFollowerFollowing{
+margin-top:15px;
 }

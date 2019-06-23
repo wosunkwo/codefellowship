@@ -6,50 +6,59 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="/style.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="myprofileBody">
 
     <nav th:replace="fragments/fragmentTemplates :: nav">...</nav>
     <header th:replace="fragments/fragmentTemplates :: header">...</header>
 
-    <div style = "text-align:center; display:block;">
+    <div class="middleDivs">
         <img th:src="${currentUser.imageUrl}" style="width: 150px;">
-        <p><b> First Name: <span th:text="${currentUser.firstName} "></span></b></p>
-        <p><b>Last Name: <span th:text="${currentUser.lastName} "></span></b></p>
-        <p><b>Date of Birth: <span th:text="${currentUser.dateOfBirth} "></span></b></p>
-        <p><b>Biography: <span th:text="${currentUser.bio} "></span></b></p>
+        <div class="aboutMe">
+            <p><b> First Name: <span th:text="${currentUser.firstName} "></span></b></p>
+            <p><b>Last Name: <span th:text="${currentUser.lastName} "></span></b></p>
+            <p><b>Date of Birth: <span th:text="${currentUser.dateOfBirth} "></span></b></p>
+            <p><b>Biography: <span th:text="${currentUser.bio} "></span></b></p>
+            <form  th:if="${!sessionStatus && !followerStatus} " action="/individualUser" method="GET" >
+                <button style=" margin-bottom: 15px; background-color: #4CAF50; color: white;" name="username" type="submit" th:value="${currentUser.username}">Follow</button>
+            </form>
+        </div>
+    </div>
 
         <hr>
 
-        <div class="postList" th:if="${!(currentUser.posts.isEmpty())}">
-            <h3>List of Your Posts</h3>
-            <ol>
-                <li th:each="post : ${currentUser.posts}">
-                    <b><p th:text="${post.getBody()}"> </p></b>
-                    <p><b> Posted on: <span th:text="${post.getCreatedAt()}"> </span></b></p>
-                </li>
-            </ol>
+    <div class="profile-flex-container">
+        <div style="text-align:center;" class="postWithPTag" th:if="${!(currentUser.posts.isEmpty())}">
+            <p>Your Posts</p>
+            <div class="individualPost" th:each="post : ${currentUser.posts}">
+                <b><p th:text="${post.getBody()}"> </p></b>
+                <p><b> Posted on: <span th:text="${post.getCreatedAt()}"> </span></b></p>
+                <hr>
+            </div>
         </div>
 
-        <div class="follwersDiv">
-            <p>People following you: </p>
-            <ul>
-                <li th:each="follower: ${currentUser.followers}">
-                    <img th:src="${follower.imageUrl}" style="width:50px;">
-                    <p><span th:text="${follower.username}"></span></p>
-                </li>
-            </ul>
+        <div class="follwersWithPTag">
+            <p style = "text-align: center;">Followers </p>
+            <div  th:each="follower: ${currentUser.followers}">
+                <div class="individualFollowerFollowing">
+                    <a th:href="@{'/users/' + ${follower.getId()}}"><img th:src="${follower.imageUrl}" style="width:50px;"></a>
+                    <span th:text="${follower.username}"></span>
+                </div>
+            </div>
         </div>
 
-        <div class="followingDiv">
-            <p>People you are following: </p>
-            <ul>
-                <li th:each="following: ${currentUser.following}">
-                    <img th:src="${following.imageUrl}" style="width:50px;">
-                    <p><span th:text="${following.username}"></span></p>
-                </li>
-            </ul>
+
+        <div class="follwingWithPTag">
+            <p style = "text-align: center;">Following: </p>
+            <div th:each="following: ${currentUser.following}">
+                <div class="individualFollowerFollowing">
+                    <a th:href="@{'/users/' + ${following.getId()}}"><img th:src="${following.imageUrl}" style="width:50px;"></a>
+<!--                    <img th:src="${following.imageUrl}" style="width:50px;">-->
+                    <span th:text="${following.username}"></span>
+                </div>
+            </div>
         </div>
-</div>
+    </div>
+
 
 </body>
 </html>
